@@ -4,6 +4,10 @@ from rest_framework.generics import RetrieveUpdateAPIView, DestroyAPIView
 from rest_framework.viewsets import ModelViewSet
 from restaurant import models
 from restaurant import serializers
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+
+
 
 # Create your views here.
 def index(request):
@@ -20,3 +24,5 @@ class SingleMenuItemView(RetrieveUpdateAPIView, DestroyAPIView):
 class BookingViewSet(ModelViewSet):
     queryset = models.Booking.objects.all()
     serializer_class = serializers.BookingSerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]

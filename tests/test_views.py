@@ -24,6 +24,9 @@ class MenuViewTest(TransactionTestCase):
     def get(self, path):
         return self.client.get(path, headers=self.request_headers)
 
+    def delete(self, path):
+        return self.client.delete(path, headers=self.request_headers)
+
     def post(self, path, data):
         return self.client.post(
             path, 
@@ -64,3 +67,13 @@ class MenuViewTest(TransactionTestCase):
 
         resp = self.get('/api/booking/tables/1/')
         self.assertEquals(json.loads(resp.content)['name'], 'Test Booking')
+
+    def test_menu_del(self):
+        resp = self.get('/api/menu-items/1/')
+        self.assertEquals(resp.status_code, 200)
+
+        resp = self.delete('/api/menu-items/1/')
+        self.assertEquals(resp.status_code, 204)
+
+        resp = self.get('/api/menu-items/1/')
+        self.assertEquals(resp.status_code, 404)

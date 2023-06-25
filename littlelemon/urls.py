@@ -26,10 +26,10 @@ router.register(r'tables', views.BookingViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('restaurant/', include('restaurant.urls')), 
+    path('', include('restaurant.urls')), 
     #path('api-auth/', include('rest_framework.urls')),
     #path('restaurant/', include('restaurant.urls')), 
-    path('restaurant/booking/', include(router.urls)),
-    
+    path('api/booking/', include(router.urls)),
     path('api/', include('LittleLemonAPI.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
